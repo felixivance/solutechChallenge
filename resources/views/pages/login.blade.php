@@ -8,8 +8,7 @@
             <div class="login-content">
                 <div class="login-logo">
                     <a href="/" class="align-content">
-{{--                        <img class="align-content" src="images/logo.png" alt="">--}}
-                       <h1>Health Records Management System</h1>
+                       <h1>SOLUTECH CODE CHALLENGE</h1>
                     </a>
                 </div>
                 <div class="login-form mt-4">
