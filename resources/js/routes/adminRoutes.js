@@ -1,11 +1,8 @@
 
 // Dashboard
 import Dashboard from '../components/dashboardComponent';
+import ProductComponent from '../components/productsComponent';
 
-
-import Patients from '../components/patientsComponent';
-import Gender from '../components/genderComponent';
-import Services from '../components/serviceComponent';
 
 export default [
     {
@@ -19,20 +16,9 @@ export default [
         name: 'Dashboard',
     },
     {
-        path: '/admin/patients',
-        component: Patients,
-        name: 'Patients',
-    },
-
-    {
-        path: '/admin/gender',
-        component: Gender,
-        name: 'Gender',
-    },
-    {
-        path: '/admin/services',
-        component: Services,
-        name: 'Services',
+        path: '/admin/products',
+        component: ProductComponent,
+        name: 'productComponent',
     },
 
 ]

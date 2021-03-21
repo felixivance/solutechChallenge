@@ -21,9 +21,11 @@
                     </li>
                     <li class="menu-title">View</li><!-- /.menu-title -->
                     <li>
-                        <router-link to="/admin/patients"> <i class="menu-icon ti-home"></i>Patients Records </router-link>
+                        <router-link to="/admin/products"> <i class="menu-icon ti-home"></i>Products </router-link>
                     </li>
-
+                    <li>
+                        <router-link to="/admin/patients"> <i class="menu-icon ti-home"></i>Suppliers </router-link>
+                    </li>
                     <li class="menu-title">SETTINGS </li><!-- /.menu-title -->
 
                     <li>
@@ -47,11 +49,11 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="./">
 {{--                        <img src="/images/logo.png" alt="Logo">--}}
-                        HRM SYSTEM
+                        SOLUTECH SYSTEM
                     </a>
                     <a class="navbar-brand hidden" href="./">
 {{--                        <img src="/images/logo2.png" alt="Logo">--}}
-                        HRMS
+                        SOLUTECH
                     </a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
@@ -63,7 +65,7 @@
 
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ Auth::user()->firstName }} {{ Auth::user()->lastName }}
+                            {{ Auth::user()->name }}
                         </a>
 
                         <div class="user-menu dropdown-menu">

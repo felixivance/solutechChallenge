@@ -14,6 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'auth:api'], function() {
+    Route::apiResources([
+        'suppliers'=> 'SupplierController',
+        'products'=> 'ProductController',
+        'orderDetails'=> 'OrderDetailsController',
+        'supplierProducts'=> 'SupplierProductController',
+        'orders'=> 'OrderController',
+
+    ]);
+
+
+    Route::get('dashboardStatistics','PatientController@dashboardStatistics');
+
+
 });
