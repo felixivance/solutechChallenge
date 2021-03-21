@@ -2,84 +2,89 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
 
 class OrderDetailsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $orderDetails = OrderDetails::orderBy('order_id','desc')->get();
+
+        return api_response(true, null, 'success',
+            'successfully fetched orders', $orderDetails);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+
+        try{
+            $orderDetails = new OrderDetails();
+            $orderDetails->order_id = $request['order_id'];
+            $orderDetails->product_id = $request['product_id'];
+
+            $orderDetails->save();
+
+            return api_response(true, null, 'success',
+                'successfully added order information', $orderDetails);
+
+        }catch (\Exception $ex){
+            return api_response(false, $ex->getMessage(), 'error',
+                'error adding order information', null);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\OrderDetails  $orderDetails
-     * @return \Illuminate\Http\Response
-     */
-    public function show(OrderDetails $orderDetails)
+
+    public function show($id)
     {
-        //
+        try{
+            $orderDetail = OrderDetails::find($id);
+
+            return api_response(true, null, 'success',
+                'successfully fetched order detail', $orderDetail);
+
+        }catch (\Exception $ex){
+            return api_response(false, $ex->getMessage(), 'error',
+                'error fetching order detail information', null);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\OrderDetails  $orderDetails
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(OrderDetails $orderDetails)
+
+    public function update(Request $request, $id)
     {
-        //
+
+        try{
+            $orderDetail = OrderDetails::find($id);
+            $orderDetail->order_id = $request['order_detail'];
+            $orderDetail->product_id = $request['product_id'];
+            $orderDetail->save();
+
+            return api_response(true, null, 'success',
+                'successfully updated order detail information', $orderDetail);
+
+        }catch (\Exception $ex){
+            return api_response(false, $ex->getMessage(), 'error',
+                'error updating order detail information', null);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OrderDetails  $orderDetails
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, OrderDetails $orderDetails)
+
+    public function destroy($id)
     {
-        //
+        try{
+            $orderDetail = OrderDetails::find($id);
+            $orderDetail->delete();
+
+            return api_response(true, null, 'success',
+                'successfully deleted order detail information', null);
+
+        }catch (\Exception $ex){
+            return api_response(false, $ex->getMessage(), 'error',
+                'error deleting order detail information', null);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\OrderDetails  $orderDetails
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(OrderDetails $orderDetails)
-    {
-        //
-    }
 }

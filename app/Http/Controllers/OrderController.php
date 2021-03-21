@@ -7,79 +7,85 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        //get all patients
+        $order = Order::orderBy('order_number','desc')->get();
+
+        return api_response(true, null, 'success',
+            'successfully fetched orders', $order);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+
+        try{
+            $patient = new Order();
+            $patient->order_number = $request['order_number'];
+
+            $patient->save();
+
+            return api_response(true, null, 'success',
+                'successfully added patient information', $patient);
+
+        }catch (\Exception $ex){
+            return api_response(false, $ex->getMessage(), 'error',
+                'error adding patient information', null);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Order $order)
+
+    public function show($id)
     {
-        //
+        try{
+
+            $order = Order::find($id);
+
+            return api_response(true, null, 'success',
+                'successfully fetched  order', $order);
+
+        }catch (\Exception $ex){
+            return api_response(false, $ex->getMessage(), 'error',
+                'error fetching order information', null);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Order $order)
+
+    public function update(Request $request, $id)
     {
-        //
+
+        try{
+
+            $order = Order::find($id);
+            $order->order_number = $request['order_number'];
+
+            $order->save();
+
+            return api_response(true, null, 'success',
+                'successfully updated order information', $order);
+
+        }catch (\Exception $ex){
+            return api_response(false, $ex->getMessage(), 'error',
+                'error updating order information', null);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Order $order)
+
+    public function destroy($id)
     {
-        //
+        try{
+            $order = Order::find($id);
+            $order->delete();
+
+            return api_response(true, null, 'success',
+                'successfully deleted order information', null);
+
+        }catch (\Exception $ex){
+            return api_response(false, $ex->getMessage(), 'error',
+                'error deleting order information', null);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Order $order)
-    {
-        //
-    }
 }

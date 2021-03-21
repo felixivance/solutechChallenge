@@ -7,79 +7,80 @@ use Illuminate\Http\Request;
 
 class SupplierProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $suppliers = SupplierProduct::orderBy('supply_id','desc')->get();
+
+        return api_response(true, null, 'success',
+            'successfully fetched suppliers', $suppliers);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        try{
+            $supplierProduct = new SupplierProduct();
+            $supplierProduct->supply_id = $request['supply_id'];
+            $supplierProduct->product_id = $request['product_id'];
+            $supplierProduct->save();
+
+            return api_response(true, null, 'success',
+                'successfully added supplier information', $supplierProduct);
+
+        }catch (\Exception $ex){
+            return api_response(false, $ex->getMessage(), 'error',
+                'error adding supplier information', null);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\SupplierProduct  $supplierProduct
-     * @return \Illuminate\Http\Response
-     */
-    public function show(SupplierProduct $supplierProduct)
+
+    public function show($id)
     {
-        //
+        try{
+            $supplierProduct = SupplierProduct::find($id);
+
+            return api_response(true, null, 'success',
+                'successfully fetched supplier details', $supplierProduct);
+
+        }catch (\Exception $ex){
+            return api_response(false, $ex->getMessage(), 'error',
+                'error fetching supplier detail information', null);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\SupplierProduct  $supplierProduct
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(SupplierProduct $supplierProduct)
+
+    public function update(Request $request, $id)
     {
-        //
+
+        try{
+            $supplierProduct = SupplierProduct::find($id);
+            $supplierProduct->supply_id = $request['supply_id'];
+            $supplierProduct->product_id = $request['product_id'];
+            $supplierProduct->save();
+
+            return api_response(true, null, 'success',
+                'successfully updated supplier detail information', $supplierProduct);
+
+        }catch (\Exception $ex){
+            return api_response(false, $ex->getMessage(), 'error',
+                'error updating order detail information', null);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\SupplierProduct  $supplierProduct
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, SupplierProduct $supplierProduct)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\SupplierProduct  $supplierProduct
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(SupplierProduct $supplierProduct)
+    public function destroy($id)
     {
-        //
+        try{
+            $supplierProduct = SupplierProduct::find($id);
+            $supplierProduct->delete();
+
+            return api_response(true, null, 'success',
+                'successfully deleted supplier information', null);
+
+        }catch (\Exception $ex){
+            return api_response(false, $ex->getMessage(), 'error',
+                'error deleting supplier information', null);
+        }
     }
 }
