@@ -24,7 +24,10 @@
                         <router-link to="/admin/products"> <i class="menu-icon ti-home"></i>Products </router-link>
                     </li>
                     <li>
-                        <router-link to="/admin/patients"> <i class="menu-icon ti-home"></i>Suppliers </router-link>
+                        <router-link to="/admin/suppliers"> <i class="menu-icon ti-home"></i>Suppliers </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/admin/orders"> <i class="menu-icon ti-home"></i>Orders </router-link>
                     </li>
                     <li class="menu-title">SETTINGS </li><!-- /.menu-title -->
 

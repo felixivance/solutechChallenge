@@ -2,6 +2,8 @@
 // Dashboard
 import Dashboard from '../components/dashboardComponent';
 import ProductComponent from '../components/productsComponent';
+import SupplierComponent from '../components/supplierComponent';
+import OrderComponent from '../components/ordersComponent';
 
 
 export default [
@@ -20,5 +22,14 @@ export default [
         component: ProductComponent,
         name: 'productComponent',
     },
-
+    {
+        path: '/admin/suppliers',
+        component: SupplierComponent,
+        name: 'SupplierComponent',
+    },
+    {
+        path: '/admin/orders',
+        component: OrderComponent,
+        name: 'OrderComponent',
+    },
 ]

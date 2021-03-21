@@ -77,53 +77,28 @@
                         <h5 v-if="!editMode" class="modal-title" id="mediumModalLabel">Add Product</h5>
                         <h5 v-else class="modal-title" id="mediumModalLabel">Update Product</h5>
                     </div>
-                    <form @submit.prevent="editMode ? updatePatient() : addProduct()">
+                    <form @submit.prevent="editMode ? updateProduct() : addProduct()">
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="company" class="form-control-label">First Name:</label>
-                                        <input required v-model="form.firstName" type="text" id="company" placeholder="Enter first Name" class="form-control" />
+                                        <label for="company" class="form-control-label">Product Name:</label>
+                                        <input required v-model="form.name" type="text" id="company" placeholder="Enter product Name" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label  class="form-control-label">Last Name:</label>
-                                        <input required v-model="form.lastName" type="text" placeholder="Enter last Name" class="form-control" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="company" class="form-control-label">Date Of Birth:</label>
-                                        <input required v-model="form.dateOfBirth" type="date" id="company" placeholder="Date Of Birth" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label  class="form-control-label">Gender:</label>
-                                        <select v-model="form.genderId" name="select" id="select" class="form-control">
-                                            <option v-for="(gender,i) in genders" :key="i" :value="gender.id">{{gender.genderType}}</option>
-                                        </select>
-
+                                        <label  class="form-control-label">Product Quantity:</label>
+                                        <input required v-model="form.quantity" type="number" placeholder="Enter quantity" class="form-control" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="company" class="form-control-label">Type Of Service:</label>
-                                        <select v-model="form.serviceId" name="select" id="select" class="form-control">
-                                            <option v-for="(service,i) in services" :key="i" :value="service.id">{{service.typeOfService}}</option>
-                                        </select>
 
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label  class="form-control-label">Comments</label>
-                                        <textarea v-model="form.comments" id="" cols="30" rows="10" class="form-control"></textarea>
+                                        <label  class="form-control-label">Description</label>
+                                        <textarea v-model="form.description" id="" cols="30" rows="10" class="form-control"></textarea>
 
                                     </div>
                                 </div>
@@ -147,11 +122,8 @@ import $ from 'jquery';
 export default {
     data() {
         return {
-            fields: ['#', 'firstName','lastName',
-                {key:'dateOfBirth', label:'Date Of Birth'},
-                {key:'gender.genderType', label:'Gender'},
-                {key:'service.typeOfService', label:'Type Of Service'},
-                {key:'comments', label:'Comments'},'actions'],
+            fields: ['#', 'name','quantity',
+                {key:'description', label:'Description'},'actions'],
             items: [],
             genders: [],
             services: [],
@@ -162,12 +134,9 @@ export default {
             editMode: false,
             form: new Form({
                 id: '',
-                firstName: '',
-                dateOfBirth:'',
-                lastName: '',
-                genderId: '',
-                serviceId: '',
-                comments: '',
+                name: '',
+                quantity:'',
+                description: '',
             })
         }
     },
@@ -185,10 +154,10 @@ export default {
             $('#mediumModal').modal('show');
             this.editMode = false;
         },
-        openEditModal(patient) {
+        openEditModal(product) {
             $('#mediumModal').modal('show');
             this.editMode = true;
-            this.form.fill(patient)
+            this.form.fill(product)
             // console.log(this.form);
         },
         async  getProducts() {
@@ -217,7 +186,7 @@ export default {
                 console.log(error);
             });
         },
-        async  updatePatient() {
+        async  updateProduct() {
             await   axios.put('/api/products/' + this.form.id, this.form).then(({ data }) => {
                 // console.log(data);
                 if (data.success) {
@@ -242,7 +211,7 @@ export default {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete patient!'
+                confirmButtonText: 'Yes, delete product!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     console.log(id);
