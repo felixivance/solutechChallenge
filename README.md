@@ -30,7 +30,7 @@ Clone the repository from https://github.com/felixivance/medbook-dev-app.git
   
   to start the project and use the credentials
   
-  admin@hrms.com as the email and password12345 as the password
+  admin@solutech.com as the email and password12345 as the password
   
   Login Page should look like the screenshots in public/screenshots
   
