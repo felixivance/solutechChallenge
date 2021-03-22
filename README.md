@@ -1,4 +1,4 @@
-Health Records Management System
+Solutech Challenge System
 
 Installation Procedure
 
