@@ -2,10 +2,10 @@ Health Records Management System
 
 Installation Procedure
 
-Clone the repository from https://github.com/felixivance/medbook-dev-app.git
+Clone the repository from https://github.com/felixivance/solutechChallenge.git
  with :
  
- git clone https://github.com/felixivance/medbook-dev-app.git
+ git clone https://github.com/felixivance/solutechChallenge.git
  
  Install the dependencies with:
  
