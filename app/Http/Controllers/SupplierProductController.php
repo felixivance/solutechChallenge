@@ -9,7 +9,8 @@ class SupplierProductController extends Controller
 {
     public function index()
     {
-        $suppliers = SupplierProduct::orderBy('supply_id','desc')->get();
+        $suppliers = SupplierProduct::orderBy('supply_id','desc')
+            ->with(['supplier','product'])->get();
 
         return api_response(true, null, 'success',
             'successfully fetched suppliers', $suppliers);

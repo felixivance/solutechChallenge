@@ -10,7 +10,7 @@ class OrderDetailsController extends Controller
 {
     public function index()
     {
-        $orderDetails = OrderDetails::orderBy('order_id','desc')->get();
+        $orderDetails = OrderDetails::orderBy('order_id','desc')->with('product','order')->get();
 
         return api_response(true, null, 'success',
             'successfully fetched orders', $orderDetails);

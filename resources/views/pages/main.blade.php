@@ -29,14 +29,11 @@
                     <li>
                         <router-link to="/admin/orders"> <i class="menu-icon ti-home"></i>Orders </router-link>
                     </li>
-                    <li class="menu-title">SETTINGS </li><!-- /.menu-title -->
+                    <li>
+                        <router-link to="/admin/supplier-products"> <i class="menu-icon ti-home"></i>Supplier Products </router-link>
+                    </li>
 
-                    <li>
-                        <router-link to="/admin/gender" > <i class="menu-icon fa fa-cogs"></i>Gender </router-link>
-                    </li>
-                    <li>
-                        <router-link to="/admin/services" > <i class="menu-icon fa fa-cogs"></i>Services </router-link>
-                    </li>
+
 
 
                 </ul>

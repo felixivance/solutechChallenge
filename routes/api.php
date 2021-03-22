@@ -21,11 +21,10 @@ Route::group(['middleware' => 'auth:api'], function() {
         'orderDetails'=> 'OrderDetailsController',
         'supplierProducts'=> 'SupplierProductController',
         'orders'=> 'OrderController',
-
     ]);
 
 
-    Route::get('dashboardStatistics','PatientController@dashboardStatistics');
+    Route::get('dashboardStatistics','OrderController@dashboardStatistics');
 
 
 });

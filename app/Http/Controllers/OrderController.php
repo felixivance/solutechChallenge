@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderDetails;
+use App\Models\Product;
+use App\Models\Supplier;
+use App\Models\SupplierProduct;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -22,17 +26,23 @@ class OrderController extends Controller
     {
 
         try{
-            $patient = new Order();
-            $patient->order_number = $request['order_number'];
+            $order = new Order();
+            $order->order_number = $request['order_number'];
 
-            $patient->save();
+            $order->save();
+
+            //create new order details
+            $orderDetails = new OrderDetails();
+            $orderDetails->order_id = $order->id;
+            $orderDetails->product_id = $request['product_id'];
+            $orderDetails->save();
 
             return api_response(true, null, 'success',
-                'successfully added patient information', $patient);
+                'successfully added order information', $order);
 
         }catch (\Exception $ex){
             return api_response(false, $ex->getMessage(), 'error',
-                'error adding patient information', null);
+                'error adding order information', null);
         }
     }
 
@@ -88,4 +98,17 @@ class OrderController extends Controller
         }
     }
 
+    public function dashboardStatistics(){
+        $orders = Order::get()->count();
+        $products = Product::get()->count();
+        $suppliers = Supplier::get()->count();
+        $suppliersProducts = SupplierProduct::get()->count();
+
+        $data =[
+            'orders'=>$orders,'products'=>$products, 'suppliers'=>$suppliers, 'supplierProducts'=>$suppliersProducts
+        ];
+
+        return api_response(true, null, 'success',
+            'successfully fetched stats', $data);
+    }
 }

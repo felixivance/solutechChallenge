@@ -4,6 +4,7 @@ import Dashboard from '../components/dashboardComponent';
 import ProductComponent from '../components/productsComponent';
 import SupplierComponent from '../components/supplierComponent';
 import OrderComponent from '../components/ordersComponent';
+import SupplierProductsComponent from '../components/supplierProductsComponent';
 
 
 export default [
@@ -31,5 +32,10 @@ export default [
         path: '/admin/orders',
         component: OrderComponent,
         name: 'OrderComponent',
+    },
+    {
+        path: '/admin/supplier-products',
+        component: SupplierProductsComponent,
+        name: 'SupplierProductsComponent',
     },
 ]
